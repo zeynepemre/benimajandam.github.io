@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Alışkanlık Takibi</title>
+
+<style>
+body{
+    background-image: url(resimler/asim.jpg);
+    font-family:Arial;
+    margin:0;
+    padding:30px;
+}
+
+/* GRID */
+.habit-container{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:30px;
+    justify-items:center;
+}
+
+/* DAİRE */
+.habit-circle{
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    position:relative;
+    background:rgb(255, 255, 255);
+    border:5px solid rgb(96, 53, 28);
+}
+
+/* ORTA YAZI */
+.habit-name{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    text-align:center;
+    font-size:16px;
+    font-weight:bold;
+    color:rgb(96, 53, 28);
+    outline:none;
+    cursor:text;
+}
+
+/* GÜNLER */
+.day{
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:rgb(96, 53, 28);
+    position:absolute;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.day.done{
+    background:rgb(213, 187, 114);
+}
+</style>
+</head>
+
+<body>
+
+<div class="habit-container" id="habitContainer"></div>
+
+<script>
+const totalHabits = 9;
+const totalDays = 21;
+const container = document.getElementById("habitContainer");
+
+for(let h = 0; h < totalHabits; h++){
+
+    const habitCircle = document.createElement("div");
+    habitCircle.className = "habit-circle";
+
+    /* HABIT NAME */
+    const name = document.createElement("div");
+    name.className = "habit-name";
+    name.contentEditable = true;
+    name.innerText = localStorage.getItem(`habitName${h}`) || "Alışkanlık Yaz";
+
+    name.addEventListener("input", () => {
+        localStorage.setItem(`habitName${h}`, name.innerText);
+    });
+
+    habitCircle.appendChild(name);
+
+    /* DAYS */
+    const radius = 110;
+    const center = 130;
+
+    for(let d = 0; d < totalDays; d++){
+        const day = document.createElement("div");
+        day.className = "day";
+
+        const angle = (360 / totalDays) * d;
+        const x = center + radius * Math.cos(angle * Math.PI / 180) - 11;
+        const y = center + radius * Math.sin(angle * Math.PI / 180) - 11;
+
+        day.style.left = x + "px";
+        day.style.top = y + "px";
+
+        /* KAYITLI DURUM */
+        const saved = localStorage.getItem(`habit${h}day${d}`);
+        if(saved === "true") day.classList.add("done");
+
+        day.addEventListener("click", () => {
+            day.classList.toggle("done");
+            localStorage.setItem(`habit${h}day${d}`, day.classList.contains("done"));
+        });
+
+        habitCircle.appendChild(day);
+    }
+
+    container.appendChild(habitCircle);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Ajanda</title>
+
+<style>
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+/* ARKA PLAN AYARLARI – TAM EKRAN */
+body{
+    font-family: Arial;
+    transition: 0.5s;
+
+    background-size: cover;        /* 🔥 EKRANI TAM DOLDURUR */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #000;
+}
+
+/* İÇERİK */
+.page{
+    padding:20px;
+    min-height:100vh;
+}
+
+.nav{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.arrow{
+    font-size:30px;
+    cursor:pointer;
+    padding:0 10px;
+    background:#f3f3f3;
+    border-radius:8px;
+    user-select:none;
+}
+
+h2{text-align:center;}
+
+.row{
+    display:flex;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.box{
+    background:#f1eef0;
+    padding:30px;
+    border-radius:20px;
+    border:7px solid #000;
+    height:140px;
+    flex:1;
+    overflow-y:auto;
+}
+
+.big{flex:2;}
+
+.baslik{
+    font-weight:bold;
+    text-align:center;
+    margin-bottom:5px;
+}
+
+.month-page{
+    text-align:center;
+    font-size:40px;
+    margin-top:00px;
+    color:#000000;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+<div class="nav">
+    <div class="arrow" onclick="prevPage()">⬅</div>
+    <div class="arrow" onclick="nextPage()">➡</div>
+</div>
+
+<h2 id="pageTitle"></h2>
+<div id="container"></div>
+
+</div>
+
+<script>
+/* AYLAR */
+const months=[
+"OCAK","ŞUBAT","MART","NİSAN","MAYIS","HAZİRAN",
+"TEMMUZ","AĞUSTOS","EYLÜL","EKİM","KASIM","ARALIK"
+];
+
+let pages=[];
+months.forEach(m=>{
+    pages.push({type:"month",name:m});
+    for(let i=1;i<=5;i++){
+        pages.push({type:"agenda",name:`${m} - Sayfa ${i}`});
+    }
+});
+
+/* 🔥 ARKA PLANLAR – EKSİKSİZ */
+const pageBackgrounds=[
+
+{image:"resimler/485b7357ce0c7cf5e459f15fbd144070.jpg"},
+{color:"#FFC0CB"},{color:"#FFB6C1"},{color:"#FF69B4"},{color:"#FF1493"},{color:"#C71585"},
+
+{image:"resimler/fd5aed02a0d47837ead406024116117c.jpg"},
+{color:"#1E90FF"},{color:"#4169E1"},{color:"#0000FF"},{color:"#0000CD"},{color:"#00008B"},
+
+{image:"resimler/7044bdf567e0e39ef18dede77cf4295e.jpg"},
+{color:"#cdb4db"},{color:"#BA55D3"},{color:"#9370DB"},{color:"#9400D3"},{color:"#8B008B"},
+
+{image:"resimler/yeşşil.jpg"},
+{color:"#7CFC00"},{color:"#32CD32"},{color:"#90EE90"},{color:"#3CB371"},{color:"#9ACD32"},
+
+{image:"resimler/sarrı.jpg"},
+{color:"#FFD700"},{color:"#FFFF00"},{color:"#FFE4B5"},{color:"#EEE8AA"},{color:"#F0E68C"},
+
+{image:"resimler/kırmızzı.jpg"},
+{color:"#CD5C5C"},{color:"#FA8072"},{color:"#DC143C"},{color:"#FF0000"},{color:"#8B0000"},
+
+{image:"resimler/turjuaz.jpg"},
+{color:"#E0F7FA"},{color:"#80DEEA"},{color:"#26C6DA"},{color:"#0097A7"},{color:"#84FFFF"},
+
+{image:"resimler/turuncu.jpg"},
+{color:"#FFB74D"},{color:"#FFA726"},{color:"#F57C00"},{color:"#FFD180"},{color:"#FF6D00"},
+
+{image:"resimler/kahve.jpg"},
+{color:"#A1887F"},{color:"#795548"},{color:"#5D4037"},{color:"#4E342E"},{color:"#3E2723"},
+
+{image:"resimler/yeşşş.jpg"},
+{color:"#98FB98"},{color:"#00FF7F"},{color:"#32CD32"},{color:"#228B22"},{color:"#006400"},
+
+{image:"resimler/morr.jpg"},
+{color:"#D8BFD8"},{color:"#EE82EE"},{color:"#DA70D6"},{color:"#FF00FF"},{color:"#BA55D3"},
+
+{image:"resimler/pembb.jpg"},
+{color:"#FFC0CB"},{color:"#FFB6C1"},{color:"#FF69B4"},{color:"#FF1493"},{color:"#DB7093"}
+];
+
+let currentPage=Number(localStorage.getItem("currentPage"))||0;
+
+function loadPage(){
+    const p=pages[currentPage];
+    const bg=pageBackgrounds[currentPage];
+    const title=document.getElementById("pageTitle");
+    const container=document.getElementById("container");
+
+    if(p.type==="month"){
+        document.body.style.backgroundImage = bg?.image ? `url(${bg.image})` : "none";
+        document.body.style.backgroundColor="#000";
+        title.style.display="none";
+        container.innerHTML=`<div class="month-page">${p.name}</div>`;
+        return;
+    }
+
+    document.body.style.backgroundImage="none";
+    document.body.style.backgroundColor=bg?.color||"#fff";
+
+    title.style.display="block";
+    title.textContent=p.name;
+
+    container.innerHTML=`
+    <div class="row">
+        <div class="box"><div class="baslik">Pazartesi</div><div id="t1" contenteditable></div></div>
+        <div class="box"><div class="baslik">Salı</div><div id="t2" contenteditable></div></div>
+        <div class="box"><div class="baslik">Çarşamba</div><div id="t3" contenteditable></div></div>
+    </div>
+    <div class="row">
+        <div class="box"><div class="baslik">Perşembe</div><div id="t4" contenteditable></div></div>
+        <div class="box"><div class="baslik">Cuma</div><div id="t5" contenteditable></div></div>
+        <div class="box"><div class="baslik">Cumartesi</div><div id="t6" contenteditable></div></div>
+    </div>
+    <div class="row">
+        <div class="box"><div class="baslik">Pazar</div><div id="t7" contenteditable></div></div>
+        <div class="box big"><div class="baslik">Kendine Not</div><div id="t8" contenteditable></div></div>
+    </div>`;
+
+    for(let i=1;i<=8;i++){
+        const a=document.getElementById("t"+i);
+        a.innerHTML=localStorage.getItem(`page${currentPage}_t${i}`)||"";
+        a.oninput=()=>localStorage.setItem(`page${currentPage}_t${i}`,a.innerHTML);
+    }
+}
+
+function nextPage(){
+    if(currentPage<pages.length-1){
+        currentPage++;
+        localStorage.setItem("currentPage",currentPage);
+        loadPage();
+    }
+}
+
+function prevPage(){
+    if(currentPage>0){
+        currentPage--;
+        localStorage.setItem("currentPage",currentPage);
+        loadPage();
+    }
+}
+
+loadPage();
+</script>
+
+</body>
+</html>

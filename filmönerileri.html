@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Film Önerileri</title>
+
+<style>
+body{
+    background-image:url('resimler/8a4ce2d2a6ea107dc68ef1ad65931744.jpg');
+    font-family:Arial;
+    padding:30px;
+}
+
+/* KATEGORİ SATIRI */
+.category{
+    display:flex;
+    align-items:flex-start;
+    margin-bottom:40px;
+}
+
+/* KATEGORİ BAŞLIĞI */
+.category h2{
+    width:150px;
+    color:rgb(109, 105, 108);
+    margin:0;
+}
+
+/* AFİŞ ALANI */
+.movies{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+/* AFİŞ */
+.movies img{
+    width:120px;
+    height:180px;
+    object-fit:cover;
+    border-radius:10px;
+    border:2px solid rgb(109,105,108);
+    transition:0.3s;
+}
+
+.movies img:hover{
+    transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<!-- DRAM -->
+<div class="category">
+    <h2>Dram</h2>
+    <div class="movies">
+        <img src="resimler/kefernahum-film-gosterimi-20247231114484728a5890e5f4f88a1352096939215b2.png" alt="kefernaum">
+        <img src="resimler/piyanist-1660915262_225x336.jpg" alt="piyanist">
+        <img src="afisler/forrest-gump.jpg" alt="Forrest Gump">
+    </div>
+</div>
+
+<!-- AKSİYON -->
+<div class="category">
+    <h2>Aksiyon</h2>
+    <div class="movies">
+        <img src="resimler/baslangic-1660924244_225x336.jpg" alt="Inception">
+        <img src="resimler/dunya-savasi-z-1660916131_225x336.jpg" alt="Dünya Z Savaşı">
+        <img src="resimler/gangsta.jpg" alt="The Gangster">
+        <img src="resimler/lucy-1660923431_225x336.jpg" alt="Lucy">
+        <img src="resimler/yarali-yuz-1660915303_225x336.jpg" alt="Scarface">
+    </div>
+</div>
+
+<!-- KOMEDİ -->
+<div class="category">
+    <h2>Komedi</h2>
+    <div class="movies">
+        <img src="resimler/recep-ivedik-1660916120_225x336.jpg" alt="GORA">
+        <img src="resimler/aile-arasinda-2025721142124486996119e9f48bda27e7f51dae498c8.jpg" alt="Aile Arasında">
+        <img src="resimler/3-ahmak-1660917429_225x336.jpg" alt="Zing">
+        <img src="resimler/simdi-ya-da-asla-1660915216_225x336.jpg" alt="Haftanın En İyi Günü">
+    </div>
+</div>
+
+<!-- BİLİM KURGU -->
+<div class="category">
+    <h2>Animasyon</h2>
+    <div class="movies">
+        <img src="resimler/ters-yuz-1660923471_225x336.jpg" alt="Interstellar">
+        <img src="resimler/yukari-bak-1660915464_225x336.jpg" alt="Matrix">
+        <img src="resimler/cesur-1660922210_225x336.jpg" alt="Rüyaların Ortasında">
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Film Önerileri</title>
+
+<style>
+body{
+    background-image:url('resimler/8a4ce2d2a6ea107dc68ef1ad65931744.jpg');
+    font-family:Arial;
+    padding:30px;
+}
+
+/* KATEGORİ SATIRI */
+.category{
+    display:flex;
+    align-items:flex-start;
+    margin-bottom:40px;
+}
+
+/* KATEGORİ BAŞLIĞI */
+.category h2{
+    width:150px;
+    color:rgb(109, 105, 108);
+    margin:0;
+}
+
+/* AFİŞ ALANI */
+.movies{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+/* AFİŞ */
+.movies img{
+    width:120px;
+    height:180px;
+    object-fit:cover;
+    border-radius:10px;
+    border:2px solid rgb(109,105,108);
+    transition:0.3s;
+}
+
+.movies img:hover{
+    transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<!-- POLİSİYE -->
+<div class="category">
+    <h2>Polisiye</h2>
+    <div class="movies">
+        <img src="resimler/dogu-ekspresinde-cinayet.webp" alt="Doğu Ekspresinde Cinayet">
+        <img src="resimler/ogul.webp" alt="Ogul">
+        <img src="resimler/onkişiydiler.jpg" alt="Onkişiydiler">
+        <img src="resimler/sis-ve-gece.webp" alt="Sis ve Gece">
+    </div>
+</div>
+
+<!-- TÜRK KLASİKLERİ -->
+<div class="category">
+    <h2>Türk Klasikleri</h2>
+    <div class="movies">
+        <img src="resimler/0001833804001-1.jpg" alt="Sergüzeşt">
+        <img src="resimler/beyaz-gemi-143236-11603242-14-K.jpg" alt="Beyaz Gemi">
+        <img src="resimler/icimizdeki-seytan-13431391-29-K.jpg" alt="İçimizdeki Şeytan">
+        <img src="resimler/ince-memed-1-11600719-25-K.jpg" alt="İnce Memed">
+        <img src="resimler/kurk-mantolu-madonna-11533164-38-K.jpg" alt="Kurk Mantolu Madonna">
+    </div>
+</div>
+
+<!-- DÜNYA KLASİKLERİ -->
+<div class="category">
+    <h2>Dünya Klasikleri</h2>
+    <div class="movies">
+        <img src="resimler/bir-idam-mahkumunun-son-gunu-57569-12243410-57-K.jpg" alt="Bir İdam Mahkumunun Son Günü">
+        <img src="resimler/siyah-lale-526811-9451240-52-O.jpg" alt="Siyah Lale">
+        <img src="resimler/petey-11564737-10-O.jpg" alt="Petey">
+        <img src="resimler/simdi-ya-da-asla-1660915216_225x336.jpg" alt="Haftanın En İyi Günü">
+    </div>
+</div>
+
+
+
+</body>
+</html>

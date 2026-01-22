@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+a {
+    color: rgb(150, 102, 135);
+    text-decoration: none;
+}
+
+/* SAYFA ARKA PLANI */
+body {
+    background-color: rgb(240, 218, 231);
+    margin: 0;
+    padding: 0;
+}
+
+/* TÜM İÇERİĞİ ORTALAR */
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+/* ORTAK DIV ÖZELLİKLERİ */
+.ajandaDiv{
+    width: 400px;
+    height: 700px;
+    border: 5px solid rgb(171, 137, 163);
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background-image: url(resimler/pırltı.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.LeftDiv {
+    width: 800px;
+    height: 700px;
+    border: 5px solid rgb(171, 137, 163);
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url(resimler/pırltı.jpg);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* BAŞLIK */
+h2 {
+    color: rgb(152, 97, 135);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 200%;
+    font-style:italic;
+}
+
+/* YAZI */
+p {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 200%;
+    font-style: italic;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="LeftDiv">
+        
+        <h2><a href="ajandasayfalar.html">My Agenda</a></h2>
+    </div>
+
+    <div class="ajandaDiv">
+        
+        <p><a href="izlenenfilmler.html">İzlediklerim</a></p>
+        <p><a href="okunankitaplar.html">Okuduklarım</a></p>
+        <p><a href="öğrenilenkelimeler.html">Öğrendiğim kelimeler</a></p>
+        <p><a href="alışkanlık takibi.html">Alışkanlık Takibi</a></p>
+        <p><a href="filmönerileri.html">Film Önerileri</a></p>
+        <p><a href="kitapönerileri.html">Kitap Önerileri</a></p>
+        <p><a href="aylık hedefler.html">Aylık Hedefler</a></p>
+        <p><a href="motivasyon.html">Motivasyon</a></p>
+    </div>
+
+</div>
+
+</body>
+</html>

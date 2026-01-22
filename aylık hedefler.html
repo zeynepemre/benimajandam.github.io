@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Yıllık Hedef Ajandası</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f2f4f7;
+    padding:20px;
+}
+
+.container{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap:20px;
+}
+
+.month{
+    background:white;
+    padding:15px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.month h3{
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.goal-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:8px;
+}
+
+.goal-box input[type="text"]{
+    flex:1;
+    padding:8px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+.check{
+    width:18px;
+    height:18px;
+    border:2px solid #4CAF50;
+    cursor:pointer;
+}
+
+.check.checked{
+    background:#4CAF50;
+}
+
+.done{
+    text-decoration: line-through;
+    color:gray;
+}
+</style>
+</head>
+
+<body>
+
+<h2 style="text-align:center;">📅 Yıllık Hedefler</h2>
+
+<div class="container" id="container"></div>
+
+<script>
+const months = [
+ "Ocak","Şubat","Mart","Nisan","Mayıs","Haziran",
+ "Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"
+];
+
+const container = document.getElementById("container");
+
+months.forEach((month,i)=>{
+    const div = document.createElement("div");
+    div.className="month";
+
+    div.innerHTML = `
+        <h3>${month}</h3>
+        ${createGoalInputs(i)}
+    `;
+
+    container.appendChild(div);
+});
+
+function createGoalInputs(monthIndex){
+    let html = "";
+    for(let i=0;i<5;i++){
+        const data = JSON.parse(localStorage.getItem(`m${monthIndex}_${i}`)) || {};
+        html += `
+        <div class="goal-box">
+            <div class="check ${data.done ? "checked":""}" onclick="toggle(this,${monthIndex},${i})"></div>
+            <input type="text"
+                   class="${data.done ? "done":""}"
+                   value="${data.text || ""}"
+                   oninput="save(${monthIndex},${i},this.value)">
+        </div>`;
+    }
+    return html;
+}
+
+function save(m,i,text){
+    const data = JSON.parse(localStorage.getItem(`m${m}_${i}`)) || {};
+    data.text = text;
+    localStorage.setItem(`m${m}_${i}`, JSON.stringify(data));
+}
+
+function toggle(el,m,i){
+    el.classList.toggle("checked");
+    const input = el.nextElementSibling;
+    input.classList.toggle("done");
+
+    const data = JSON.parse(localStorage.getItem(`m${m}_${i}`)) || {};
+    data.done = el.classList.contains("checked");
+    data.text = input.value;
+    localStorage.setItem(`m${m}_${i}`, JSON.stringify(data));
+}
+</script>
+
+</body>
+</html>
+

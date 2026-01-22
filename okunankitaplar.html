@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>OKUNAN KİTAPLAR</title>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background-image:url(resimler/oku.jpg);
+        padding:20px;
+    }
+
+    h1{
+        text-align:center;
+    }
+
+    .row{
+        display:flex;
+        justify-content:center;
+        gap:80px;
+        margin-bottom:20px;
+    }
+
+    .box{
+        width:200px;
+        height:200px;
+        background:rgba(185, 86, 157, 0.208);
+        border-radius:10px;
+        padding:10px;
+        box-shadow:0 0 10px rgba(0,0,0,0.1);
+        display:flex;
+        flex-direction:column;
+    }
+
+    .box textarea{
+        flex:1;
+        border:none;
+        outline:none;
+        resize:none;
+        font-size:14px;
+        background-color: rgba(230, 179, 213, 0.5);
+        
+    }
+
+    .save-btn{
+        margin-top:10px;
+        padding:6px;
+        border:none;
+        background:rgba(238, 167, 218, 0.125);
+        color:rgb(248, 246, 247);
+        border-radius:6px;
+        cursor:pointer;
+    }
+</style>
+</head>
+<body>
+
+<h1 style="color: rgba(204, 156, 193, 0.61);">Okuduğun Kitapları Yaz ve Butona(Aylar) Bas</h1>
+
+<!-- 1. SIRA -->
+<div class="row">
+    <div class="box">
+        <textarea id="note1"></textarea>
+        <button class="save-btn" onclick="saveNote('note1')">OCAK</button>
+    </div>
+
+    <div class="box">
+        <textarea id="note2"></textarea>
+        <button class="save-btn" onclick="saveNote('note2')">ŞUBAT</button>
+    </div>
+
+    <div class="box">
+        <textarea id="note3"></textarea>
+        <button class="save-btn" onclick="saveNote('note3')">MART</button>
+    </div>
+
+    <div class="box">
+        <textarea id="note4"></textarea>
+        <button class="save-btn" onclick="saveNote('note4')">NİSAN</button>
+    </div>
+</div>
+
+<!-- 2. SIRA -->
+<div class="row">
+    <div class="box">
+        <textarea id="note5"></textarea>
+        <button class="save-btn" onclick="saveNote('note5')">MAYIS</button>
+    </div>
+
+    <div class="box">
+        <textarea id="note6"></textarea>
+        <button class="save-btn" onclick="saveNote('note6')">HAZİRAN</button>
+    </div>
+
+    <div class="box">
+        <textarea id="note7"></textarea>
+        <button class="save-btn" onclick="saveNote('note7')">TEMMUZ</button>
+    </div>
+
+    <div class="box">
+        <textarea id="note8"></textarea>
+        <button class="save-btn" onclick="saveNote('note8')">AĞUSTOS</button>
+    </div>
+</div>
+
+<!-- 3. SIRA -->
+<div class="row">
+    <div class="box">
+        <textarea id="note9"></textarea>
+        <button class="save-btn" onclick="saveNote('note9')">EYLÜL</button>
+    </div>
+
+    <div class="box">
+        <textarea id="note10"></textarea>
+        <button class="save-btn" onclick="saveNote('note10')">EKİM</button>
+    </div>
+
+    <div class="box">
+        <textarea id="note11"></textarea>
+        <button class="save-btn" onclick="saveNote('note11')">KASIM</button>
+    </div>
+
+    <div class="box">
+        <textarea id="note12"></textarea>
+        <button class="save-btn" onclick="saveNote('note12')">ARALIK</button>
+    </div>
+</div>
+
+<script>
+    // Sayfa açıldığında kaydedilmiş notları yükle
+    window.onload = function(){
+        for(let i=1; i<=12; i++){
+            let key = "note" + i;
+            let saved = localStorage.getItem(key);
+            if(saved){
+                document.getElementById(key).value = saved;
+            }
+        }
+    }
+
+    // Notu kaydet
+    function saveNote(id){
+        let content = document.getElementById(id).value;
+        localStorage.setItem(id, content);
+        alert("Not kaydedildi!");
+    }
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>A-Z Defter Fihrist</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-image: url(resimler/ysim.jpg);
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .fihrist {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .kart {
+        position: relative;
+        min-height: 220px;
+        border: 4px solid #197413;
+        border-radius: 12px;
+        padding: 10px 10px 10px 35px; /* spiral boşluğu */
+        background: #ffffff;
+        outline: none;
+        cursor: text;
+        box-shadow: 0 4px 8px #197413;
+    }
+
+    /* DEFTER SPİRALİ */
+    .kart::before {
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 18px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: linear-gradient(#197413, #197413);
+        box-shadow:
+            0 18px #197413,
+            0 36px #197413,
+            0 54px #197413,
+            0 72px #197413,
+            0 90px #197413,
+            0 108px #197413,
+            0 126px #197413,
+            0 144px #197413,
+            0 162px #197413;
+            
+           ;
+    }
+
+    .baslik {
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 8px;
+        border-bottom: 1px solid #197413;
+        padding-bottom: 5px;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    h2{
+        color: #197413;
+    }
+</style>
+</head>
+
+<body>
+
+<h2>Öğrendiğim Kelimeler</h2>
+
+<div class="fihrist">
+
+<script>
+const harfler = "ABCDEFGHIJKLMNOPRSTUVYZ";
+
+harfler.split("").forEach((harf, index) => {
+    document.write(`
+        <div class="kart" contenteditable="true" data-id="${index}">
+            <div class="baslik">${harf}</div>
+            
+        </div>
+    `);
+});
+</script>
+
+</div>
+
+<button onclick="kaydet()">Kaydet</button>
+<button onclick="temizle()">Temizle</button>
+
+<script>
+    // Sayfa açılınca kayıtlı verileri yükle
+    document.querySelectorAll(".kart").forEach(kart => {
+        let id = kart.dataset.id;
+        let veri = localStorage.getItem("fihrist_" + id);
+        if (veri) {
+            kart.innerHTML = veri;
+        }
+    });
+
+    function kaydet() {
+        document.querySelectorAll(".kart").forEach(kart => {
+            let id = kart.dataset.id;
+            localStorage.setItem("fihrist_" + id, kart.innerHTML);
+        });
+        alert("Fihrist kaydedildi ✔");
+    }
+
+    function temizle() {
+        document.querySelectorAll(".kart").forEach(kart => {
+            let id = kart.dataset.id;
+            localStorage.removeItem("fihrist_" + id);
+            let baslik = kart.querySelector(".baslik").innerText;
+            kart.innerHTML = `<div class="baslik">${baslik}</div>`;
+        });
+    }
+</script>
+
+</body>
+</html>
